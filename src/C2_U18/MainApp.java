@@ -23,6 +23,7 @@ public class MainApp {
 			lasQuerys.crearDB(basesDatos[i]);
 		}
 		
+		
 		//Creamos las tablas del EJERCICIO 1.
 		
 		lasQuerys.crearTabla(basesDatos[0], "fabricantes"," (codigo INT NOT NULL AUTO_INCREMENT,"
@@ -37,6 +38,7 @@ public class MainApp {
 				+ "	 FOREIGN KEY (fabricante) REFERENCES fabricantes(codigo) ON DELETE CASCADE ON UPDATE CASCADE) ");
 
 		//Insertamos los datos del EJERCICIO 1.
+		
 		lasQuerys.insertarDatos(basesDatos[0], "INSERT INTO fabricantes(nombre)"
 				+ "VALUES ('Samsung'),"
 				+ "('Apple'),"
@@ -50,6 +52,7 @@ public class MainApp {
 				+ "('Edge','300',3),"
 				+ "('3310','50',5),"
 				+ "('One Desire','250',4)");
+		
 		
 		
 		
@@ -87,6 +90,7 @@ public class MainApp {
 		
 		
 		
+		
 		//Creamos las tablas del EJERCICIO 3.
 
 		lasQuerys.crearTabla(basesDatos[2], "almacenes"," (codigo int NOT NULL AUTO_INCREMENT,"
@@ -121,6 +125,8 @@ public class MainApp {
 				+ "('E5E5E','Brocas', 100, 4)");
 
 		
+		
+		
 		//Creamos las tablas del EJERCICIO 4.
 		
 		lasQuerys.crearTabla(basesDatos[3], "peliculas"," (codigo int NOT NULL AUTO_INCREMENT,"
@@ -148,6 +154,9 @@ public class MainApp {
 				+ "('Sala 3',4),"
 				+ "('Sala 4',5),"
 				+ "('Sala 12',2)");		
+		
+		
+		
 		
 		//Creamos las tablas del EJERCICIO 5.
 		
@@ -185,6 +194,10 @@ public class MainApp {
 				+ "('3333333C','Oscar Vilamitjana','9999999C',21),"
 				+ "('6666666F','Jessie Rocket','9999999B',21),"
 				+ "('4444444D','James Rocket','9999999B',22)");
+		
+		
+		
+		
 		
 		//Creamos las tablas del EJERCICIO 6.
 		
@@ -224,8 +237,174 @@ public class MainApp {
 				+ "(3,'C',10),"
 				+ "(4,'D',1),"
 				+ "(1,'B',1),"
-				+ "(5,'E',4)");			
+				+ "(5,'E',4)");		
+		
+		
+		
+		
+		//Creamos las tablas del EJERCICIO 7
+		
+		lasQuerys.crearTabla(basesDatos[6], "cientificos"," (dni VARCHAR(8) NOT NULL PRIMARY KEY,"
+				+ " nomapels NVARCHAR(255) NOT NULL"
+				+ " )");
 				
+		lasQuerys.crearTabla(basesDatos[6], "proyecto"," (id CHAR(4) NOT NULL PRIMARY KEY,"
+				+ "  nombre VARCHAR(255) NOT NULL,"
+				+ "  horas INT NOT NULL"
+				+ "	)");
+				
+		lasQuerys.crearTabla(basesDatos[6], "asignadoa"," (cientifico VARCHAR(8) NOT NULL,"
+				+ "  proyecto CHAR(4) NOT NULL,"
+				+ "  FOREIGN KEY (cientifico) REFERENCES cientificos(dni) ON DELETE CASCADE ON UPDATE CASCADE,"
+				+ "  FOREIGN KEY (proyecto) REFERENCES proyecto(id) ON DELETE CASCADE ON UPDATE CASCADE"
+				+ "	)");
+
+		
+		//Insertamos los datos del EJERCICIO 7.
+		
+		lasQuerys.insertarDatos(basesDatos[6], "INSERT INTO cientificos(dni, nomapels)"
+				+ "VALUES ('57962980', 'Juan'),"
+				+ "('50322133', 'Kat'),"
+				+ "('38104182', 'Moira'),"
+				+ "('68529401', 'Miguel'),"
+				+ "('93897470', 'Maria')");
+				
+		lasQuerys.insertarDatos(basesDatos[6], "INSERT INTO proyecto(id,nombre,horas)"
+				+ "VALUES ('3981','Galaxy',1),"
+				+ "('3982','Iphone',2),"
+				+ "('3983','Edge',3),"
+				+ "('3984','Qualcom',4),"
+				+ "('3985','One Desire',5)");
+				
+		lasQuerys.insertarDatos(basesDatos[6], "INSERT INTO asignadoa(cientifico, proyecto)"
+				+ "VALUES ('57962980','3981'),"
+				+ "('50322133','3982'),"
+				+ "('38104182','3983'),"
+				+ "('68529401','3984'),"
+				+ "('93897470','3985')");
+			
+		
+		
+		
+		//Creamos las tablas del EJERCICIO 8
+		
+		lasQuerys.crearTabla(basesDatos[7], "cajeros"," (codigo INT AUTO_INCREMENT PRIMARY KEY,"
+				+ " nomapels NVARCHAR(255) NOT NULL"
+				+ " )");
+				
+		lasQuerys.crearTabla(basesDatos[7], "productos"," (codigo INT AUTO_INCREMENT PRIMARY KEY,"
+				+ "  nombre VARCHAR(100) NOT NULL,"
+				+ "  precio INT NOT NULL"
+				+ "	)");
+				
+		lasQuerys.crearTabla(basesDatos[7], "maquinasregistradoras"," (codigo INT AUTO_INCREMENT PRIMARY KEY,"
+				+ "  piso INT NOT NULL"
+				+ "	)");
+		
+		lasQuerys.crearTabla(basesDatos[7], "venta"," (cajero INT NOT NULL,"
+				+ "  maquina INT NOT NULL,"
+				+ "  producto INT NOT NULL,"
+				+ "  PRIMARY KEY (cajero,maquina,producto),"
+				+ "  FOREIGN KEY (cajero) REFERENCES cajeros(codigo) ON DELETE CASCADE ON UPDATE CASCADE,"
+				+ "  FOREIGN KEY (maquina) REFERENCES maquinasregistradoras(codigo) ON DELETE CASCADE ON UPDATE CASCADE,"
+				+ "  FOREIGN KEY (producto) REFERENCES productos(codigo) ON DELETE CASCADE ON UPDATE CASCADE"
+				+ "	)");
+
+		//Insertamos los datos del EJERCICIO 8.
+		
+		lasQuerys.insertarDatos(basesDatos[7], "INSERT INTO cajeros(nomapels)"
+				+ "VALUES ('Juan'),"
+				+ "('Kat'),"
+				+ "('Moira'),"
+				+ "('Miguel'),"
+				+ "('Maria')");
+				
+		lasQuerys.insertarDatos(basesDatos[7], "INSERT INTO productos(nombre,precio)"
+				+ "VALUES ('Chocolate',1),"
+				+ "('Pasta',2),"
+				+ "('Pizza',3),"
+				+ "('Pan',4),"
+				+ "('Leche',5)");
+				
+		lasQuerys.insertarDatos(basesDatos[7], "INSERT INTO maquinasregistradoras(piso)"
+				+ "VALUES (1),"
+				+ "(1),"
+				+ "(2),"
+				+ "(2),"
+				+ "(3)");
+		
+		lasQuerys.insertarDatos(basesDatos[7], "INSERT INTO venta(cajero,maquina,producto)"
+				+ "VALUES (1, 1, 1),"
+				+ "(2, 2, 2),"
+				+ "(3, 3, 3),"
+				+ "(4, 4, 4),"
+				+ "(5, 5, 5)");
+		
+		
+		
+		
+		//Creamos las tablas del EJERCICIO 9
+		
+		lasQuerys.crearTabla(basesDatos[8], "facultad"," (codigo INT AUTO_INCREMENT PRIMARY KEY,"
+				+ " nombre NVARCHAR(100) NOT NULL"
+				+ " )");
+				
+		lasQuerys.crearTabla(basesDatos[8], "investigadores"," (dni VARCHAR(8) PRIMARY KEY,"
+				+ "  nomapels NVARCHAR(255) NOT NULL,"
+				+ "  facultad INT NOT NULL,"
+				+ "	 FOREIGN KEY (facultad) REFERENCES facultad(codigo) ON DELETE CASCADE ON UPDATE CASCADE"
+				+ "	)");
+				
+		lasQuerys.crearTabla(basesDatos[8], "equipos"," (numserie CHAR(4) PRIMARY KEY,"
+				+ "  nombre NVARCHAR(100) NOT NULL,"
+				+ "  facultad INT NOT NULL, "
+				+ "  FOREIGN KEY (facultad) REFERENCES facultad(codigo) ON DELETE CASCADE ON UPDATE CASCADE"
+				+ "	)");
+				
+		lasQuerys.crearTabla(basesDatos[8], "reserva"," (dni VARCHAR(8) NOT NULL,"
+				+ "  numserie CHAR(4) NOT NULL,"
+				+ "  comienzo DATE NOT NULL,"
+				+ "  fin DATE NOT NULL,"
+				+ "  PRIMARY KEY (dni,numserie),"
+				+ "  FOREIGN KEY (dni) REFERENCES investigadores(dni) ON DELETE CASCADE ON UPDATE CASCADE,"
+				+ "  FOREIGN KEY (numserie) REFERENCES equipos(numserie) ON DELETE CASCADE ON UPDATE CASCADE"
+				+ "	)");
+		
+		
+		//Insertamos los datos del EJERCICIO 9.
+		
+		lasQuerys.insertarDatos(basesDatos[8], "INSERT INTO facultad(nombre)"
+				+ "VALUES ('Brown'),"
+				+ "('Cenntenial'),"
+				+ "('Jiao Tong'),"
+				+ "('Copenhague'),"
+				+ "('Kioto')");
+						
+		lasQuerys.insertarDatos(basesDatos[8], "INSERT INTO investigadores(dni, nomapels, facultad)"
+				+ "VALUES ('27381476', 'Juan',1),"
+				+ "('27381475','Kat',2),"
+				+ "('27381474','Moira',3),"
+				+ "('27381473','Miguel',4),"
+				+ "('27381472','Maria',5)");
+						
+		lasQuerys.insertarDatos(basesDatos[8], "INSERT INTO equipos(numserie, nombre, facultad)"
+				+ "VALUES ('4823','T',1),"
+				+ "('1862','E',2),"
+				+ "('9541','A',3),"
+				+ "('0560','M',4),"
+				+ "('4381','5',5)");
+				
+		lasQuerys.insertarDatos(basesDatos[8], "INSERT INTO reserva(dni, numserie, comienzo, fin)"
+				+ "VALUES ('27381476','4823', '2022-01-01','2022-02-01'),"
+				+ "('27381475','1862', '2022-02-02','2022-03-02'),"
+				+ "('27381474','9541', '2022-03-03','2022-04-03'),"
+				+ "('27381473','0560', '2022-04-04','2022-05-04'),"
+				+ "('27381472','4381', '2022-05-05','2022-06-05')");
+		
 		lasQuerys.cerrarCon();
+		
 	}
+	
 }
+		
+		
